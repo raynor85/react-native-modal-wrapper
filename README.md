@@ -5,7 +5,7 @@ Wrapper component that extends the react native Modal component, adding overlay 
 ## Central modal box example
 
 <img src="http://i.imgur.com/b9WqSys.gif" width=300>
-```
+```jsx
 <Dialog
     isOpen={isOpen}
     onClosed={this.onCancel}
@@ -25,7 +25,7 @@ Wrapper component that extends the react native Modal component, adding overlay 
 ## Bottom contextual menu example
 
 <img src="http://i.imgur.com/D4fZCSY.gif" width=300>
-```
+```jsx
 <Dialog
     isOpen={isOpen}
 	onClosed={onClosed}
@@ -49,8 +49,8 @@ Wrapper component that extends the react native Modal component, adding overlay 
 
 ## Right contextual menu example
 
-<img src="http://i.imgur.com/ztDIaIT.gif" width=600>
-```
+<img src="http://i.imgur.com/2unlOIz.gif" width=600>
+```jsx
 <Dialog
 	containerStyle={{ flexDirection: 'row', justifyContent: 'flex-end' }}
     isOpen={isFilterByTagPanelOpen}
