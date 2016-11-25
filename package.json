@@ -1,0 +1,28 @@
+{
+  "name": "react-native-modal-wrapper",
+  "version": "1.0.0",
+  "description": "Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raynor85/react-native-modal-wrapper.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "modal",
+    "dialog"
+  ],
+  "author": "Ruben Rizzi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raynor85/react-native-modal-wrapper/issues"
+  },
+  "homepage": "https://github.com/raynor85/react-native-modal-wrapper#readme",
+  "dependencies": {
+    "react-native-keyboard-spacer": "^0.3.0"
+  }
+}
