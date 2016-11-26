@@ -2,6 +2,12 @@
 
 Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions
 
+## Install
+
+```
+npm install react-native-modal-wrapper --save
+```
+
 ## Central modal box example
 
 <img src="http://i.imgur.com/b9WqSys.gif" width=300>
