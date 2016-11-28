@@ -1,4 +1,4 @@
-# react-native-modal-wrapper
+# react-native-modal-wrapper [![npm version](https://badge.fury.io/js/react-native-modal-wrapper.svg)](https://badge.fury.io/js/react-native-modal-wrapper)
 
 Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions
 
@@ -11,6 +11,7 @@ npm install react-native-modal-wrapper --save
 ## Central modal box example
 
 <img src="http://i.imgur.com/b9WqSys.gif" width=300>
+
 ```jsx
 <Dialog
     isOpen={isOpen}
@@ -31,6 +32,7 @@ npm install react-native-modal-wrapper --save
 ## Bottom contextual menu example
 
 <img src="http://i.imgur.com/D4fZCSY.gif" width=300>
+
 ```jsx
 <Dialog
     isOpen={isOpen}
@@ -56,6 +58,7 @@ npm install react-native-modal-wrapper --save
 ## Right contextual menu example
 
 <img src="http://i.imgur.com/2unlOIz.gif" width=600>
+
 ```jsx
 <Dialog
 	containerStyle={{ flexDirection: 'row', justifyContent: 'flex-end' }}
