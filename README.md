@@ -10,14 +10,14 @@ npm install react-native-modal-wrapper --save
 
 ## Central modal box example
 
-<img src="http://i.imgur.com/b9WqSys.gif" width=300>
+<img src="https://j.gifs.com/1jErAV.gif" width=300>
 
 ```jsx
 <Dialog
-    isOpen={isOpen}
-    onClosed={this.onCancel}
-    title="New project"
-    style={{ paddingLeft: 24, paddingRight: 24 }}>
+    onRequestClose={this.onCancel}
+    style={{ width: 280, height: 180, paddingLeft: 24, paddingRight: 24 }}
+    visible={isOpen}>
+  <Text>New project</Text>
   <TextField
       autoFocus={true}
       placeholder="Project name"
@@ -31,14 +31,14 @@ npm install react-native-modal-wrapper --save
 ```
 ## Bottom contextual menu example
 
-<img src="http://i.imgur.com/D4fZCSY.gif" width=300>
+<img src="https://j.gifs.com/48VRZn.gif" width=400>
 
 ```jsx
 <Dialog
-    isOpen={isOpen}
-	onClosed={onClosed}
-	style={{ flex: 1 }}
-	containerStyle={{ flexDirection: 'row', alignItems: 'flex-end' }}>
+    containerStyle={{ flexDirection: 'row', alignItems: 'flex-end' }}
+    onRequestClose={onClosed}
+    style={{ flex: 1 }}
+    visible={isOpen}>
   {this.contextMenuActions.map(([id, text, onPress]) =>
 	<MDButtonIcon
 	    key={id}
@@ -57,15 +57,15 @@ npm install react-native-modal-wrapper --save
 
 ## Right contextual menu example
 
-<img src="http://i.imgur.com/2unlOIz.gif" width=600>
+<img src="https://j.gifs.com/lOX54g.gif" width=400>
 
 ```jsx
 <Dialog
-	containerStyle={{ flexDirection: 'row', justifyContent: 'flex-end' }}
-    isOpen={isFilterByTagPanelOpen}
-    onClosed={() => this.setState({ isFilterByTagPanelOpen: false })}
+    containerStyle={{ flexDirection: 'row', justifyContent: 'flex-end' }}
+    onRequestClose={() => this.setState({ isFilterByTagPanelOpen: false })}
     position="right"
-    style={{ width: 360 }}>
+    style={styles.sidebar}
+    visible={isFilterByTagPanelOpen}>
   <FilterByTag
       onClose={() => this.setState({ isFilterByTagPanelOpen: false })}
       onSelection={tags => updateProjectFilter({ tags })}>
