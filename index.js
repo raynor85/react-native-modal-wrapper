@@ -119,17 +119,19 @@ export default class ModalWrapper extends Component {
       <Animated.View style={modalStyle}>
         {children}
       </Animated.View>
-    </View>
-    {Platform.OS === 'ios' && <KeyboardSpacer />}
+    </View>;
+    const keyboardSpacer = Platform.OS === 'ios' && <KeyboardSpacer />;
 
     return (
       isNative ? <Modal
           visible={visible}
           {...modalProps}>
         {content}
+        {keyboardSpacer}
       </Modal> : visible ? <View
           style={styles.overlayWrapper}>
         {content}
+        {keyboardSpacer}
       </View> : null
     );
   }
