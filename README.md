@@ -83,6 +83,7 @@ This component supports all the properties of the original react native modal co
 | animationDuration | 300 | `number` | Duration of the animation. |
 | position | bottom | `string` | Position where the sliding animation of the modal should start. Accepted values: "top", "bottom", "left", "right". |
 | containerStyle | - | `object` | Container styles used for positioning the modal with flexbox (default: alignItems: 'center', flex: 1, justifyContent: 'center'). See the examples. |
+| isNative | true | `bool` | Determine the usage of the react native modal component or a simple view wrapper instead. It can be set to false to overcome some react native modal limitations (for example to have more than one modal open at the same time). |
 | overlayStyle | - | `object` | Styles used to define the overlay backgroundColor (default: "#000") and opacity (default: 0.5). |
 | style | - | `object` | Styles of the modal (default: backgroundColor: '#fff', justifyContent: 'center'). |
 

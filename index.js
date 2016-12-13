@@ -24,9 +24,9 @@ export default class ModalWrapper extends Component {
 
   getInitState = () => {
     return {
-      overlayOpacity: new Animated.Value(0),
-      position: new Animated.Value(this.getInitialPosition()),
-      isAnimating: false
+      currentPosition: new Animated.Value(this.getInitialPosition()),
+      isAnimating: false,
+      overlayOpacity: new Animated.Value(0)
     };
   }
 
@@ -43,9 +43,9 @@ export default class ModalWrapper extends Component {
         this.animateOpen();
       } else {
         this.setState({
-          overlayOpacity: new Animated.Value(this.getOverlayOpacity()),
-          position: new Animated.Value(0),
-          isAnimating: false
+          currentPosition: new Animated.Value(0),
+          isAnimating: false,
+          overlayOpacity: new Animated.Value(this.getOverlayOpacity())
         });
       }
     }
@@ -72,7 +72,7 @@ export default class ModalWrapper extends Component {
       }
     ).start();
     Animated.timing(
-      this.state.position, {
+      this.state.currentPosition, {
         toValue: 0,
         duration: animationDuration
       }
@@ -93,7 +93,7 @@ export default class ModalWrapper extends Component {
       }
     ).start();
     Animated.timing(
-      this.state.position, {
+      this.state.currentPosition, {
         toValue: initialPosition,
         duration: animationDuration
       }
@@ -105,33 +105,41 @@ export default class ModalWrapper extends Component {
   };
 
   render() {
-    const { children, containerStyle, overlayStyle, style, ...modalProps } = this.props;
-    const { overlayOpacity, position } = this.state;
+    const { children, containerStyle, isNative, overlayStyle, position, style, visible, ...modalProps } = this.props;
+    const { currentPosition, overlayOpacity } = this.state;
     const modalStyle = [
       styles.modal,
       style,
-      { transform: this.isVertical ? [{ translateY: position }] : [{ translateX: position }] }
+      { transform: this.isVertical ? [{ translateY: currentPosition }] : [{ translateX: currentPosition }] }
     ];
+    const content = <View style={[styles.container, containerStyle]}>
+      <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.animateClose}>
+          <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
+      </TouchableWithoutFeedback>
+      <Animated.View style={modalStyle}>
+        {children}
+      </Animated.View>
+    </View>
+    {Platform.OS === 'ios' && <KeyboardSpacer />}
+
     return (
-      <Modal
+      isNative ? <Modal
+          visible={visible}
           {...modalProps}>
-        <View style={[styles.container, containerStyle]}>
-          <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.animateClose}>
-              <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
-          </TouchableWithoutFeedback>
-          <Animated.View style={modalStyle}>
-            {children}
-          </Animated.View>
-        </View>
-        {Platform.OS === 'ios' && <KeyboardSpacer />}
-      </Modal>
+        {content}
+      </Modal> : visible ? <View
+          style={styles.overlayWrapper}>
+        {content}
+      </View> : null
     );
   }
 }
 
 ModalWrapper.propTypes = {
+  animateOnMount: React.PropTypes.bool,
   animationDuration: React.PropTypes.number,
   containerStyle: React.PropTypes.object,
+  isNative: React.PropTypes.bool,
   overlayStyle: React.PropTypes.object,
   position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   visible: React.PropTypes.bool.isRequired
@@ -141,6 +149,7 @@ ModalWrapper.defaultProps = {
   animateOnMount: false,
   animationDuration: 300,
   animationType: 'none',
+  isNative: true,
   onRequestClose: () => null,
   position: 'bottom',
   transparent: true
