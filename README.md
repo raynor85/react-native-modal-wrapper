@@ -13,7 +13,7 @@ npm install react-native-modal-wrapper --save
 <img src="https://j.gifs.com/1jErAV.gif" width=300>
 
 ```jsx
-<Dialog
+<ModalWrapper
     onRequestClose={this.onCancel}
     style={{ width: 280, height: 180, paddingLeft: 24, paddingRight: 24 }}
     visible={isOpen}>
@@ -27,14 +27,14 @@ npm install react-native-modal-wrapper --save
     <MDButton text="CANCEL" type="regular" flat={true} onPress={this.onCancel} />
     <MDButton text="CREATE" type="primary" flat={true} onPress={this.onSubmit} />
   </View>
-</Dialog>
+</ModalWrapper>
 ```
 ## Bottom contextual menu example
 
 <img src="https://j.gifs.com/48VRZn.gif" width=400>
 
 ```jsx
-<Dialog
+<ModalWrapper
     containerStyle={{ flexDirection: 'row', alignItems: 'flex-end' }}
     onRequestClose={onClosed}
     style={{ flex: 1 }}
@@ -52,7 +52,7 @@ npm install react-native-modal-wrapper --save
 	  <Text>{text}</Text>
 	</MDButtonIcon>
   )}
-</Dialog>
+</ModalWrapper>
 ```
 
 ## Right contextual menu example
@@ -60,7 +60,7 @@ npm install react-native-modal-wrapper --save
 <img src="https://j.gifs.com/lOX54g.gif" width=400>
 
 ```jsx
-<Dialog
+<ModalWrapper
     containerStyle={{ flexDirection: 'row', justifyContent: 'flex-end' }}
     onRequestClose={() => this.setState({ isFilterByTagPanelOpen: false })}
     position="right"
@@ -70,7 +70,7 @@ npm install react-native-modal-wrapper --save
       onClose={() => this.setState({ isFilterByTagPanelOpen: false })}
       onSelection={tags => updateProjectFilter({ tags })}>
   </FilterByTag>
-</Dialog>
+</ModalWrapper>
 ```
 
 ## Properties

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Animated, Dimensions, Modal, Platform, TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-export default class Dialog extends Component {
+export default class ModalWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = this.getInitState();
@@ -129,7 +129,7 @@ export default class Dialog extends Component {
   }
 }
 
-Dialog.propTypes = {
+ModalWrapper.propTypes = {
   animationDuration: React.PropTypes.number,
   containerStyle: React.PropTypes.object,
   overlayStyle: React.PropTypes.object,
@@ -137,7 +137,7 @@ Dialog.propTypes = {
   visible: React.PropTypes.bool.isRequired
 };
 
-Dialog.defaultProps = {
+ModalWrapper.defaultProps = {
   animateOnMount: false,
   animationDuration: 300,
   animationType: 'none',
