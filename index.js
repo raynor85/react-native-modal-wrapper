@@ -30,6 +30,27 @@ export default class Dialog extends Component {
     };
   }
 
+  getOverlayOpacity = () => {
+    const { overlayStyle: { opacity } = {} } = this.props;
+    return opacity === 0 || opacity > 0 ? opacity : 0.5;
+  }
+
+  componentDidMount() {
+    const { animateOnMount, visible } = this.props;
+
+    if (visible) {
+      if (animateOnMount) {
+        this.animateOpen();
+      } else {
+        this.setState({
+          overlayOpacity: new Animated.Value(this.getOverlayOpacity()),
+          position: new Animated.Value(0),
+          isAnimating: false
+        });
+      }
+    }
+  }
+
   componentWillReceiveProps(newProps) {
     if (newProps.visible !== this.props.visible) {
       if (newProps.visible) {
@@ -42,11 +63,11 @@ export default class Dialog extends Component {
   }
 
   animateOpen = () => {
-    const { animationDuration, overlayStyle: { opacity } = {} } = this.props;
+    const { animationDuration } = this.props;
 
     Animated.timing(
       this.state.overlayOpacity, {
-        toValue: opacity === 0 || opacity > 0 ? opacity : 0.5,
+        toValue: this.getOverlayOpacity(),
         duration: animationDuration
       }
     ).start();
@@ -117,6 +138,7 @@ Dialog.propTypes = {
 };
 
 Dialog.defaultProps = {
+  animateOnMount: false,
   animationDuration: 300,
   animationType: 'none',
   onRequestClose: () => null,
