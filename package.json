@@ -4,7 +4,8 @@
   "description": "Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,17 @@
     "url": "https://github.com/raynor85/react-native-modal-wrapper/issues"
   },
   "homepage": "https://github.com/raynor85/react-native-modal-wrapper#readme",
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "react-native-keyboard-spacer": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.1.1",
+    "eslint": "3.12.1",
+    "eslint-plugin-react": "6.8.0",
+    "eslint-plugin-react-native": "2.2.1",
+    "pre-commit": "1.2.2"
   }
 }

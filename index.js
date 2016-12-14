@@ -105,7 +105,7 @@ export default class ModalWrapper extends Component {
   };
 
   render() {
-    const { children, containerStyle, isNative, overlayStyle, position, style, visible, ...modalProps } = this.props;
+    const { children, containerStyle, isNative, overlayStyle, style, visible, ...modalProps } = this.props;
     const { currentPosition, overlayOpacity } = this.state;
     const modalStyle = [
       styles.modal,
