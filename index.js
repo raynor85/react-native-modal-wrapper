@@ -40,7 +40,7 @@ export default class ModalWrapper extends Component {
   }
 
   componentDidMount() {
-    const { animateOnMount, visible } = this.props;
+    const { animateOnMount, onAnimateOpen, visible } = this.props;
 
     if (visible) {
       if (animateOnMount) {
@@ -51,6 +51,7 @@ export default class ModalWrapper extends Component {
           isAnimating: false,
           overlayOpacity: new Animated.Value(this.getOverlayOpacity())
         });
+        onAnimateOpen();
       }
     }
   }
@@ -60,13 +61,14 @@ export default class ModalWrapper extends Component {
       if (newProps.visible) {
         this.animateOpen();
       } else {
-        const { onRequestClose, shouldAnimateOnOverlayPress, shouldAnimateOnRequestClose } = newProps;
+        const { onAnimateClose, onRequestClose, shouldAnimateOnOverlayPress, shouldAnimateOnRequestClose } = newProps;
         const handleClose = (shouldAnimate) => {
           if (shouldAnimate) {
             this.animateClose();
           } else {
-            onRequestClose();
             this.setState(this.getInitState());
+            onRequestClose();
+            onAnimateClose();
           }
         };
 
@@ -80,7 +82,7 @@ export default class ModalWrapper extends Component {
   }
 
   animateOpen = () => {
-    const { animationDuration } = this.props;
+    const { animationDuration, onAnimateOpen } = this.props;
 
     Animated.timing(
       this.state.overlayOpacity, {
@@ -95,12 +97,13 @@ export default class ModalWrapper extends Component {
       }
     ).start(() => {
       this.setState({ isAnimating: false });
+      onAnimateOpen();
     });
     this.setState({ isAnimating: true });
   };
 
   animateClose = () => {
-    const { animationDuration } = this.props;
+    const { animationDuration, onAnimateClose } = this.props;
     const initialPosition = this.getInitialPosition();
 
     Animated.timing(
@@ -117,6 +120,7 @@ export default class ModalWrapper extends Component {
     ).start(() => {
       this.isClosingFromOverlayPress = false;
       this.setState({ isAnimating: false });
+      onAnimateClose();
     });
     this.setState({ isAnimating: true });
   };
@@ -172,6 +176,8 @@ ModalWrapper.propTypes = {
   animationDuration: React.PropTypes.number,
   containerStyle: React.PropTypes.object,
   isNative: React.PropTypes.bool,
+  onAnimateClose: React.PropTypes.func,
+  onAnimateOpen: React.PropTypes.func,
   overlayStyle: React.PropTypes.object,
   position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   shouldAnimateOnOverlayPress: React.PropTypes.bool,
@@ -185,6 +191,8 @@ ModalWrapper.defaultProps = {
   animationDuration: 300,
   animationType: 'none',
   isNative: true,
+  onAnimateClose: () => null,
+  onAnimateOpen: () => null,
   onRequestClose: () => null,
   position: 'bottom',
   shouldAnimateOnOverlayPress: true,
