@@ -85,6 +85,9 @@ This component supports all the properties of the original react native modal co
 | containerStyle | - | `object` | Container styles used for positioning the modal with flexbox (default: alignItems: 'center', flex: 1, justifyContent: 'center'). See the examples. |
 | isNative | true | `bool` | Determine the usage of the react native modal component or a simple view wrapper instead. It can be set to false to overcome some react native modal limitations (for example to have more than one modal open at the same time). |
 | overlayStyle | - | `object` | Styles used to define the overlay backgroundColor (default: "#000") and opacity (default: 0.5). |
+| shouldAnimateOnOverlayPress | true | `bool` | Determine whether or not animate the modal closing down when the overlay is pressed. |
+| shouldAnimateOnRequestClose | false | `bool` | Determine whether or not animate the modal closing down when the onRequestClose callback is executed. |
+| shouldCloseOnOverlayPress | true | `bool` | Determine whether or not allow the modal closing down if the overlay is pressed. |
 | style | - | `object` | Styles of the modal (default: backgroundColor: '#fff', justifyContent: 'center'). |
 
 Note: this component sets some properties of the underlying native modal component to allow sliding flexibility in each direction and the clickable overlay behavior, therefore we suggest not to change those. However, you can set to 0 the animationDuration prop to avoid the component sliding logic from top, bottom, left or right and therefore turning on the react native modal animationType prop, disabled by default. Here the list of the react native modal properties set by default:
