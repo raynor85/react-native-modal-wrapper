@@ -138,7 +138,19 @@ export default class ModalWrapper extends Component {
   }
 
   render() {
-    const { children, containerStyle, isNative, overlayStyle, style, visible, ...modalProps } = this.props;
+    const { visible, ...nativeModalProps } = Object.keys(Modal.propTypes).reduce((previous, current) => {
+      if (this.props.hasOwnProperty(current)) {
+        previous[current] = this.props[current];
+      }
+      return previous;
+    }, {});
+    const { children, containerStyle, isNative, overlayStyle, showOverlay, style,
+          ...modalProps } = Object.keys(this.props).reduce((previous, current) => {
+      if (!Modal.propTypes.hasOwnProperty(current) && current !== 'position') {
+        previous[current] = this.props[current];
+      }
+      return previous;
+    }, {});
     const { currentPosition, isAnimating, overlayOpacity } = this.state;
     const isVisible = visible || isAnimating;
     const modalStyle = [
@@ -146,26 +158,27 @@ export default class ModalWrapper extends Component {
       style,
       { transform: this.isVertical() ? [{ translateY: currentPosition }] : [{ translateX: currentPosition }] }
     ];
-    const content = <View style={[styles.container, containerStyle]}>
-      <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
+    const modal = <Animated.View style={modalStyle} {...modalProps}>
+      {children}
+    </Animated.View>;
+    const container = <View style={[styles.container, containerStyle]}>
+      {showOverlay && <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
           <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
-      </TouchableWithoutFeedback>
-      <Animated.View style={modalStyle}>
-        {children}
-      </Animated.View>
+      </TouchableWithoutFeedback>}
+      {modal}
     </View>;
     const keyboardSpacer = Platform.OS === 'ios' && <KeyboardSpacer />;
     const nativeModal = <Modal
         visible={isVisible}
-        {...modalProps}>
-      {content}
+        {...nativeModalProps}>
+      {container}
       {keyboardSpacer}
     </Modal>;
-    const jsModal = isVisible ? <View
+    const jsModal = isVisible && (showOverlay ? <View
         style={styles.overlayWrapper}>
-      {content}
+      {container}
       {keyboardSpacer}
-    </View> : null;
+    </View> : modal);
 
     return isNative ? nativeModal : jsModal;
   }
@@ -180,6 +193,7 @@ ModalWrapper.propTypes = {
   onAnimateOpen: React.PropTypes.func,
   overlayStyle: React.PropTypes.object,
   position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  showOverlay: React.PropTypes.bool,
   shouldAnimateOnOverlayPress: React.PropTypes.bool,
   shouldAnimateOnRequestClose: React.PropTypes.bool,
   shouldCloseOnOverlayPress: React.PropTypes.bool,
@@ -195,6 +209,7 @@ ModalWrapper.defaultProps = {
   onAnimateOpen: () => null,
   onRequestClose: () => null,
   position: 'bottom',
+  showOverlay: true,
   shouldAnimateOnOverlayPress: true,
   shouldAnimateOnRequestClose: false,
   shouldCloseOnOverlayPress: true,

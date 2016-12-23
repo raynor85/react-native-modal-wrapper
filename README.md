@@ -73,6 +73,36 @@ npm install react-native-modal-wrapper --save
 </ModalWrapper>
 ```
 
+## Modal without overlay example
+
+<img src="https://j.gifs.com/Y6XqlO.gif" width=400>
+
+```jsx
+<View style={styles.container} onLayout={() => this.forceUpdate()}>
+  {/* Page Content */}
+  <ModalWrapper
+      isNative={false}
+      onRequestClose={this.onRequestClose}
+      position='left'
+      shouldAnimateOnRequestClose={true}
+      showOverlay={false}
+      style={[styles.modalStyle, (() => {
+        const { height, width } = Dimensions.get('window');
+        const modalHeight = 100;
+        const modalWidth = 280;
+        return {
+          top: (height - modalHeight) / 2,
+          left: (width - modalWidth) / 2
+        };
+      })()]}
+      visible={this.state.visible}>
+    <View style={styles.container}>
+      <Text style={styles.modalText}>Modal without overlay</Text>
+    </View>
+  </ModalWrapper>
+</View>
+```
+
 ## Properties
 
 This component supports all the properties of the original react native modal component https://facebook.github.io/react-native/docs/modal.html, plus the following:
@@ -90,6 +120,7 @@ This component supports all the properties of the original react native modal co
 | shouldAnimateOnOverlayPress | true | `bool` | Determine whether or not animate the modal closing down when the overlay is pressed. |
 | shouldAnimateOnRequestClose | false | `bool` | Determine whether or not animate the modal closing down when the onRequestClose callback is executed. |
 | shouldCloseOnOverlayPress | true | `bool` | Determine whether or not allow the modal closing down if the overlay is pressed. |
+| showOverlay | true | `bool` | Determine whether or not showing the overlay. In combination with isNative={false} it is possible to interact with the background of the application when the modal is still open. |
 | style | - | `object` | Styles of the modal (default: backgroundColor: '#fff', justifyContent: 'center'). |
 
 Note: this component sets some properties of the underlying native modal component to allow sliding flexibility in each direction and the clickable overlay behavior, therefore we suggest not to change those. However, you can set to 0 the animationDuration prop to avoid the component sliding logic from top, bottom, left or right and therefore turning on the react native modal animationType prop, disabled by default. Here the list of the react native modal properties set by default:
