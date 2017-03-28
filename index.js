@@ -187,11 +187,11 @@ export default class ModalWrapper extends Component {
 ModalWrapper.propTypes = {
   animateOnMount: React.PropTypes.bool,
   animationDuration: React.PropTypes.number,
-  containerStyle: React.PropTypes.object,
+  containerStyle: React.PropTypes.any,
   isNative: React.PropTypes.bool,
   onAnimateClose: React.PropTypes.func,
   onAnimateOpen: React.PropTypes.func,
-  overlayStyle: React.PropTypes.object,
+  overlayStyle: React.PropTypes.any,
   position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   showOverlay: React.PropTypes.bool,
   shouldAnimateOnOverlayPress: React.PropTypes.bool,
