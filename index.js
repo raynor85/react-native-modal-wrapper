@@ -161,24 +161,24 @@ export default class ModalWrapper extends Component {
     const modal = <Animated.View style={modalStyle} {...modalProps}>
       {children}
     </Animated.View>;
-    const container = <View style={[styles.container, containerStyle]}>
-      {showOverlay && <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
-          <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
-      </TouchableWithoutFeedback>}
-      {modal}
-    </View>;
-    const keyboardSpacer = Platform.OS === 'ios' && <KeyboardSpacer />;
+    const keyboardSpacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null;
+    const renderContainer = (hasKeyboardSpacer) => ( // eslint-disable-line no-extra-parens
+      <View style={[styles.container, containerStyle]}>
+        {showOverlay &&
+          <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
+            <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
+          </TouchableWithoutFeedback>}
+        {modal}
+        {hasKeyboardSpacer && keyboardSpacer}
+      </View>
+    );
     const nativeModal = <Modal
         visible={isVisible}
         {...nativeModalProps}>
-      {container}
+      {renderContainer()}
       {keyboardSpacer}
     </Modal>;
-    const jsModal = isVisible && (showOverlay ? <View
-        style={styles.overlayWrapper}>
-      {container}
-      {keyboardSpacer}
-    </View> : modal);
+    const jsModal = isVisible ? renderContainer(true) : null;
 
     return isNative ? nativeModal : jsModal;
   }
