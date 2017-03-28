@@ -144,8 +144,9 @@ export default class ModalWrapper extends Component {
       }
       return previous;
     }, {});
-    const { children, containerStyle, isNative, overlayStyle, showOverlay, style,
+    const { children, containerStyle, isNative, overlayStyle, showOverlay, screenHeight, style,
           ...modalProps } = Object.keys(this.props).reduce((previous, current) => {
+      // the reducer is used to get the correct set of ...modalProps
       if (!Modal.propTypes.hasOwnProperty(current) && current !== 'position') {
         previous[current] = this.props[current];
       }
@@ -161,7 +162,8 @@ export default class ModalWrapper extends Component {
     const modal = <Animated.View style={modalStyle} {...modalProps}>
       {children}
     </Animated.View>;
-    const keyboardSpacer = Platform.OS === 'ios' ? <KeyboardSpacer /> : null;
+    const computedScreenHeight = screenHeight ? screenHeight : Dimensions.get('window').height;
+    const keyboardSpacer = Platform.OS === 'ios' ? <KeyboardSpacer screenHeight={computedScreenHeight} /> : null;
     const renderContainer = (hasKeyboardSpacer) => ( // eslint-disable-line no-extra-parens
       <View style={[styles.container, containerStyle]}>
         {showOverlay &&
@@ -193,6 +195,7 @@ ModalWrapper.propTypes = {
   onAnimateOpen: React.PropTypes.func,
   overlayStyle: React.PropTypes.any,
   position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  screenHeight: React.PropTypes.number,
   showOverlay: React.PropTypes.bool,
   shouldAnimateOnOverlayPress: React.PropTypes.bool,
   shouldAnimateOnRequestClose: React.PropTypes.bool,

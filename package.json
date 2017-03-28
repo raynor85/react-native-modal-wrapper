@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-wrapper",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "lint"
   ],
   "dependencies": {
-    "react-native-keyboard-spacer": "^0.3.0"
+    "react-native-keyboard-spacer": "miguelsm/react-native-keyboard-spacer#screen-height-prop"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
