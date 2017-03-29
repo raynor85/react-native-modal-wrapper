@@ -180,7 +180,7 @@ export default class ModalWrapper extends Component {
       {renderContainer()}
       {keyboardSpacer}
     </Modal>;
-    const jsModal = isVisible ? renderContainer(true) : null;
+    const jsModal = isVisible && (showOverlay ? renderContainer(true) : modal);
 
     return isNative ? nativeModal : jsModal;
   }
