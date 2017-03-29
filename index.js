@@ -164,14 +164,14 @@ export default class ModalWrapper extends Component {
     </Animated.View>;
     const computedScreenHeight = screenHeight ? screenHeight : Dimensions.get('window').height;
     const keyboardSpacer = Platform.OS === 'ios' ? <KeyboardSpacer screenHeight={computedScreenHeight} /> : null;
-    const renderContainer = (hasKeyboardSpacer) => ( // eslint-disable-line no-extra-parens
-      <View style={[styles.container, containerStyle]}>
+    const renderContainer = (isJs) => ( // eslint-disable-line no-extra-parens
+      <View style={[isJs && styles.overlayWrapper, styles.container, containerStyle]}>
         {showOverlay &&
           <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
             <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
           </TouchableWithoutFeedback>}
         {modal}
-        {hasKeyboardSpacer && keyboardSpacer}
+        {isJs && keyboardSpacer}
       </View>
     );
     const nativeModal = <Modal
