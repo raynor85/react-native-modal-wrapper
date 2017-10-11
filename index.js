@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions, Modal, Platform, TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import PropTypes from 'prop-types';
 
 export default class ModalWrapper extends Component {
   constructor(props) {
@@ -187,20 +188,20 @@ export default class ModalWrapper extends Component {
 }
 
 ModalWrapper.propTypes = {
-  animateOnMount: React.PropTypes.bool,
-  animationDuration: React.PropTypes.number,
-  containerStyle: React.PropTypes.any,
-  isNative: React.PropTypes.bool,
-  onAnimateClose: React.PropTypes.func,
-  onAnimateOpen: React.PropTypes.func,
-  overlayStyle: React.PropTypes.any,
-  position: React.PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  screenHeight: React.PropTypes.number,
-  showOverlay: React.PropTypes.bool,
-  shouldAnimateOnOverlayPress: React.PropTypes.bool,
-  shouldAnimateOnRequestClose: React.PropTypes.bool,
-  shouldCloseOnOverlayPress: React.PropTypes.bool,
-  visible: React.PropTypes.bool.isRequired
+  animateOnMount: PropTypes.bool,
+  animationDuration: PropTypes.number,
+  containerStyle: PropTypes.any,
+  isNative: PropTypes.bool,
+  onAnimateClose: PropTypes.func,
+  onAnimateOpen: PropTypes.func,
+  overlayStyle: PropTypes.any,
+  position: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  screenHeight: PropTypes.number,
+  showOverlay: PropTypes.bool,
+  shouldAnimateOnOverlayPress: PropTypes.bool,
+  shouldAnimateOnRequestClose: PropTypes.bool,
+  shouldCloseOnOverlayPress: PropTypes.bool,
+  visible: PropTypes.bool.isRequired
 };
 
 ModalWrapper.defaultProps = {

@@ -33,13 +33,13 @@
     "lint"
   ],
   "dependencies": {
-    "react-native-keyboard-spacer": "miguelsm/react-native-keyboard-spacer#screen-height-prop"
+    "react-native-keyboard-spacer": "^0.4.1"
   },
   "devDependencies": {
-    "babel-eslint": "7.1.1",
-    "eslint": "3.12.1",
-    "eslint-plugin-react": "6.8.0",
-    "eslint-plugin-react-native": "2.2.1",
+    "babel-eslint": "8.0.1",
+    "eslint": "4.8.0",
+    "eslint-plugin-react": "7.4.0",
+    "eslint-plugin-react-native": "3.1.0",
     "pre-commit": "1.2.2"
   }
 }
