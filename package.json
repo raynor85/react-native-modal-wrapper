@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-wrapper",
-  "version": "3.0.0",
+  "version": "3.0.1-pre",
   "description": "Wrapper component that extends the react native Modal component, adding overlay clickable behavior and allowing swipe in and out in all directions",
   "main": "index.js",
   "scripts": {
