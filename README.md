@@ -117,6 +117,7 @@ This component supports all the properties of the original react native modal co
 | onAnimateClose | () => null | `func` | Callback executed after the modal is closed. |
 | onAnimateOpen | () => null | `func` | Callback executed after the modal is open. |
 | overlayStyle | - | `any` | Styles used to define the overlay backgroundColor (default: "#000") and opacity (default: 0.5). |
+| overlayTestID | - | `string` | testID prop for the overlay element. |
 | screenHeight | computed screen height | `number` | Allow the user to manually set the right screen height to adjust the keyboardSpacer due to an issue on iPad in react native https://github.com/facebook/react-native/issues/7340. |
 | shouldAnimateOnOverlayPress | true | `bool` | Determine whether or not animate the modal closing down when the overlay is pressed. |
 | shouldAnimateOnRequestClose | false | `bool` | Determine whether or not animate the modal closing down when the onRequestClose callback is executed. |

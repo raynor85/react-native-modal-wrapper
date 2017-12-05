@@ -145,7 +145,7 @@ export default class ModalWrapper extends Component {
       }
       return previous;
     }, {});
-    const { children, containerStyle, isNative, overlayStyle, showOverlay, screenHeight, style,
+    const { children, containerStyle, isNative, overlayStyle, overlayTestID, showOverlay, screenHeight, style,
           ...modalProps } = Object.keys(this.props).reduce((previous, current) => {
       // the reducer is used to get the correct set of ...modalProps
       if (!Modal.propTypes.hasOwnProperty(current) && current !== 'position') {
@@ -165,10 +165,10 @@ export default class ModalWrapper extends Component {
     </Animated.View>;
     const computedScreenHeight = screenHeight ? screenHeight : Dimensions.get('window').height;
     const keyboardSpacer = Platform.OS === 'ios' ? <KeyboardSpacer screenHeight={computedScreenHeight} /> : null;
-    const renderContainer = (isJs) => ( // eslint-disable-line no-extra-parens
+    const renderContainer = isJs => ( // eslint-disable-line no-extra-parens
       <View style={[isJs && styles.overlayWrapper, styles.container, containerStyle]}>
         {showOverlay &&
-          <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress}>
+          <TouchableWithoutFeedback style={styles.overlayWrapper} onPress={this.onOverlayPress} testID={overlayTestID}>
             <Animated.View style={[styles.overlay, overlayStyle, { opacity: overlayOpacity }]} />
           </TouchableWithoutFeedback>}
         {modal}
@@ -195,6 +195,7 @@ ModalWrapper.propTypes = {
   onAnimateClose: PropTypes.func,
   onAnimateOpen: PropTypes.func,
   overlayStyle: PropTypes.any,
+  overlayTestID: PropTypes.string,
   position: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   screenHeight: PropTypes.number,
   showOverlay: PropTypes.bool,
